@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Product {
-  code       BigInt  @id @default(autoincrement())
+  code       BigInt  @id
   name       String  @unique
   costprice  Decimal @db.Decimal(9, 2)
   salesprice Decimal @db.Decimal(9, 2)
