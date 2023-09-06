@@ -79,4 +79,38 @@ export default {
       return res.status(500).json({ message: `Error: ${e.message}` });
     }
   },
+  async getPack(req: Request, res: Response) {
+    try {
+
+      const { id } = req.params;
+      const pack = await prisma.pack.findUnique({
+        where: {
+          id: Number(id)
+        }
+      });
+
+      if (!pack) {
+        return res.json({
+          error: true,
+          message: 'Error: Pack not found!',
+        });
+      }
+
+      return res
+        .status(200)
+        .json({
+          error: false,
+          message: 'Success: Get pack!',
+          pack: {
+            id: pack.id.toString(),
+            pack_id: pack.pack_id.toString(),
+            product_id: pack.product_id.toString(),
+            qty: pack.qty.toString(),
+          }
+        });
+
+    } catch (e) {
+      return res.status(500).json({ message: `Error: ${e.message}` });
+    }
+  },
 };
