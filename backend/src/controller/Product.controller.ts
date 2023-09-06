@@ -1,12 +1,24 @@
 import { Request, Response } from 'express'; 
 import { prisma } from '../database';
 
+
+
 export default {
   async createProduct(req: Request, res: Response) {
+    `Este código cadastra o produto mas retorna o message 
+    {
+      "message": "Error: Do not know how to serialize a BigInt"
+    }
+    `;
     try {
       const { code, name, costprice, salesprice } = req.body;
+
+      const codeNumber = parseInt(code, 10);
+
       const alreadyExists = await prisma.product.findUnique({
-        where: code,
+        where: {
+          code: codeNumber
+        },
       });
 
       if(alreadyExists) {
@@ -18,7 +30,7 @@ export default {
 
       const product = await prisma.product.create({
         data: {
-          code,
+          code: codeNumber,
           name,
           costprice,
           salesprice
@@ -32,7 +44,7 @@ export default {
       });
 
     } catch (e) {
-      return res.json({ message: e.message });
+      return res.json({ message: `Error: ${e.message}` });
     }
   }
 };
