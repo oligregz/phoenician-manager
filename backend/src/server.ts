@@ -10,6 +10,8 @@ app.get('/api/v1', (req, res) => {
   return res.send({ message: 'Success on Get request' });
 });
 
+app.get('/api/v1/pack', PackController.listPacks);
+
 app.post('/api/v1/create-product', ProductController.createProduct);
 app.post('/api/v1/create-pack', PackController.createPack);
 
