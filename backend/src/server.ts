@@ -16,6 +16,8 @@ app.get('/api/v1/pack/:id', PackController.getPack);
 app.post('/api/v1/create-product', ProductController.createProduct);
 app.post('/api/v1/create-pack', PackController.createPack);
 
+app.put('/api/v1/update-pack', PackController.updatePack);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

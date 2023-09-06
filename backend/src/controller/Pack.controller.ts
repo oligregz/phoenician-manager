@@ -113,4 +113,54 @@ export default {
       return res.status(500).json({ message: `Error: ${e.message}` });
     }
   },
+  async updatePack(req: Request, res: Response) {
+    try {
+      const { id, pack_id, product_id, qty } = req.body;
+
+      // const idBigInt = BigInt(id);
+      const packId = BigInt(pack_id);
+      const productId = BigInt(product_id);
+      const quantity = BigInt(qty);
+
+      const packExsists = await prisma.pack.findUnique({
+        where: {
+          id: Number(id)
+        }
+      });
+
+      if (!packExsists) {
+        return res.json({
+          error: true,
+          message: 'Error: Pack not found!',
+        });
+      }
+
+      const pack = await prisma.pack.update({
+        where: {
+          id: Number(id)
+        },
+        data: {
+          pack_id: packId,
+          product_id: productId,
+          qty: quantity,
+        }
+      });
+
+      return res
+        .status(200)
+        .json({
+          error: false,
+          message: 'Success: Updated pack!',
+          pack: {
+            id: pack.id.toString(),
+            pack_id: pack.pack_id.toString(),
+            product_id: pack.product_id.toString(),
+            qty: pack.qty.toString(),
+          }
+        });
+
+    } catch (e) {
+      return res.status(500).json({ message: `Error: ${e.message}` });
+    }
+  },
 };
