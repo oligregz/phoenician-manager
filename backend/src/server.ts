@@ -18,6 +18,8 @@ app.post('/api/v1/create-pack', PackController.createPack);
 
 app.put('/api/v1/update-pack', PackController.updatePack);
 
+app.delete('/api/v1/delete-pack/:id', PackController.deletePack);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

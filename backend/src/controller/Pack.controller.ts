@@ -163,4 +163,38 @@ export default {
       return res.status(500).json({ message: `Error: ${e.message}` });
     }
   },
+  async deletePack(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const packExsists = await prisma.pack.findUnique({
+        where: {
+          id: Number(id)
+        }
+      });
+
+      if (!packExsists) {
+        return res.json({
+          error: true,
+          message: 'Error: Pack not found!',
+        });
+      }
+
+      const pack = await prisma.pack.delete({
+        where: {
+          id: Number(id)
+        },
+      });
+
+      return res
+        .status(200)
+        .json({
+          error: false,
+          message: 'Success: Deleted pack!',
+        });
+
+    } catch (e) {
+      return res.status(500).json({ message: `Error: ${e.message}` });
+    }
+  },
 };
