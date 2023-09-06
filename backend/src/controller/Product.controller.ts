@@ -3,7 +3,6 @@ import { prisma } from '../database';
 
 export default {
   async createProduct(req: Request, res: Response) {
-
     try {
       const { code, name, costprice, salesprice } = req.body;
 
@@ -41,7 +40,9 @@ export default {
       });
 
     } catch (e) {
-      return res.json({ message: `Error: ${e.message}` });
+      return res
+        .status(500)
+        .json({ message: `Error: ${e.message}` });
     }
   }
 };
