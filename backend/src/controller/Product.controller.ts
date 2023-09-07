@@ -76,4 +76,38 @@ export default {
       return res.status(500).json({ message: `Error: ${e.message}` });
     }
   },
+  async getProduct(req: Request, res: Response) {
+    try {
+
+      const { code } = req.params;
+      const product = await prisma.product.findUnique({
+        where: {
+          code: Number(code)
+        }
+      });
+
+      if (!product) {
+        return res.json({
+          error: true,
+          message: 'Error: Product not found!',
+        });
+      }
+
+      return res
+        .status(200)
+        .json({
+          error: false,
+          message: 'Success: Get product!',
+          product: {
+            code: product.code.toString(),
+            name: product.name,
+            costprice: product.costprice,
+            salesprice: product.salesprice
+          },
+        });
+
+    } catch (e) {
+      return res.status(500).json({ message: `Error: ${e.message}` });
+    }
+  },
 };
