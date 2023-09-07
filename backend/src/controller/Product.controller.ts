@@ -76,7 +76,7 @@ export default {
       return res.status(500).json({ message: `Error: ${e.message}` });
     }
   },
-  async updatePack(req: Request, res: Response) {
+  async updateProduct(req: Request, res: Response) {
     try {
       const { code, name, costprice, salesprice } = req.body;
 

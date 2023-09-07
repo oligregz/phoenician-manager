@@ -1,7 +1,7 @@
 import  Express  from 'express';
 import ProductController from './controller/Product.controller';
 import PackController from './controller/Pack.controller';
-import { updateProduct } from './middlewares/validate_product.middleware';
+import { validateProduct } from './middlewares/validate_product.middleware';
 
 const app = Express();
 app.use(Express.json());
@@ -20,7 +20,7 @@ app.post('/api/v1/create-product', ProductController.createProduct);
 app.post('/api/v1/create-pack', PackController.createPack);
 
 app.put('/api/v1/update-pack', PackController.updatePack);
-app.put('/api/v1/update-product', updateProduct, ProductController.updatePack);
+app.put('/api/v1/update-product', validateProduct, ProductController.updateProduct);
 
 app.delete('/api/v1/delete-pack/:id', PackController.deletePack);
 

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-export const updateProduct = (req: Request, res: Response, next) => {
+export const validateProduct = (req: Request, res: Response, next) => {
   try {
     const { costprice, salesprice } = req.body;
 
