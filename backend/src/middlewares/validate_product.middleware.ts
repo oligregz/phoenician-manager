@@ -22,7 +22,7 @@ export const validateProduct = (req: Request, res: Response, next) => {
   
   } catch (e) {
     return next(res.json({
-      message: `Data Validation Exception: ${e.message}`
+      message: `Data_Validation_Exception: ${e.message}`
     }));
   }
 };
