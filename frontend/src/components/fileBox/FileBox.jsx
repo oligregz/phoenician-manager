@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import parseCSV from '../../utils/transformCsv';
 import updateProduct from '../../service/product/update.service';
 
@@ -6,6 +6,10 @@ const FileBox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvData, setCSVData] = useState([]);
   const [validate, setValidate] = useState([]);
+
+  useEffect(() => {
+    console.log(csvData);
+  }, [csvData]);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];

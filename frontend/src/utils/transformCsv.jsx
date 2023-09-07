@@ -1,4 +1,3 @@
-// csvParser.js
 const parseCSV = async (csvFile) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -18,7 +17,14 @@ const parseCSV = async (csvFile) => {
             const obj = {};
 
             for (let j = 0; j < headers.length; j++) {
-              obj[headers[j]] = values[j];
+
+              if (headers[j] === 'product_code') {
+                obj['code'] = values[j];
+              } else if (headers[j] === 'new_price') {
+                obj['salesprice'] = values[j];
+              } else {
+                obj[headers[j]] = values[j];
+              }
             }
 
             result.push(obj);
