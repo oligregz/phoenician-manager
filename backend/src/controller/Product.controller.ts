@@ -185,7 +185,9 @@ export default {
           message: 'Success: List of updated products',
           products: updateProducts
         });
-      updateProducts = [];
+
+      // updateProducts = [];
+
     } catch (e) {
       return res
         .status(500)
