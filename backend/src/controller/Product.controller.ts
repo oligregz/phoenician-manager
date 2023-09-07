@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'; 
 import { prisma } from '../database';
 
+let updateProducts = [];
+
 export default {
   async createProduct(req: Request, res: Response) {
     try {
@@ -104,6 +106,17 @@ export default {
         }
       });
 
+      // keep updated product
+      updateProducts = [];
+      updateProducts.push({
+        product: {
+          code: product.code.toString(),
+          name: product.name,
+          costprice: product.costprice,
+          salesprice: product.salesprice
+        }
+      });
+
       return res
         .status(200)
         .json({
@@ -154,4 +167,29 @@ export default {
       return res.status(500).json({ message: `Error: ${e.message}` });
     }
   },
+
+  async getUpdatedProducts(req: Request, res: Response) {
+    try {
+      if (updateProducts.length === 0) {
+        return res
+          .status(500)
+          .json({
+            error: true,
+            message: 'Error: Product update not found!'
+          });
+      }
+      res
+        .status(200)
+        .json({
+          error: false,
+          message: 'Success: List of updated products',
+          products: updateProducts
+        });
+      updateProducts = [];
+    } catch (e) {
+      return res
+        .status(500)
+        .json({ message: `Error: ${e.message}` });
+    }
+  }
 };
