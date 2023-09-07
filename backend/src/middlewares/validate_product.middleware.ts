@@ -3,8 +3,8 @@ export const validateProduct = (req: Request, res: Response, next) => {
   try {
     const { costprice, salesprice } = req.body;
 
-    if (!costprice || !salesprice) {
-      throw new Error('Error assigning "costprice" or "salesprice" fields');
+    if (!salesprice) {
+      throw new Error('Error assigning "salesprice" field');
     }
     
     if (salesprice < costprice) {

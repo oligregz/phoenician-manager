@@ -95,25 +95,32 @@ export default {
         });
       }
 
-      const product = await prisma.product.update({
+      const updatedData: Record<string, unknown> = {}; 
+      if (name !== undefined) {
+        updatedData.name = name;
+      }
+      if (costprice !== undefined) {
+        updatedData.costprice = costprice;
+      }
+      if (salesprice !== undefined) {
+        updatedData.salesprice = salesprice;
+      }
+
+      const updatedProduct = await prisma.product.update({
         where: {
           code: Number(code)
         },
-        data: {
-          name: name,
-          costprice: costprice,
-          salesprice: salesprice
-        }
+        data: updatedData
       });
 
       // keep updated product
       updateProducts = [];
       updateProducts.push({
         product: {
-          code: product.code.toString(),
-          name: product.name,
-          costprice: product.costprice,
-          salesprice: product.salesprice
+          code: updatedProduct.code.toString(),
+          name: updatedProduct.name,
+          costprice: updatedProduct.costprice,
+          salesprice: updatedProduct.salesprice
         }
       });
 
@@ -123,10 +130,10 @@ export default {
           error: false,
           message: 'Success: Updated product!',
           product: {
-            code: product.code.toString(),
-            name: product.name,
-            costprice: product.costprice,
-            salesprice: product.salesprice
+            code: updatedProduct.code.toString(),
+            name: updatedProduct.name,
+            costprice: updatedProduct.costprice,
+            salesprice: updatedProduct.salesprice
           }
         });
 
