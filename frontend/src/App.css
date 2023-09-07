@@ -1,0 +1,14 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vh;
+  padding: 2rem;
+  text-align: center;
+  background-color: black;
+}
+
+.general {
+}
