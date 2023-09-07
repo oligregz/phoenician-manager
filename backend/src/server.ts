@@ -2,10 +2,19 @@ import  Express  from 'express';
 import ProductController from './controller/Product.controller';
 import PackController from './controller/Pack.controller';
 import { validateProduct } from './middlewares/validate_product.middleware';
+import cors from 'cors';
 
 const app = Express();
 app.use(Express.json());
 const PORT = 5945;
+
+app.use(
+  cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  })
+);
 
 app.get('/api/v1', (req, res) => {
   return res.send({ message: 'Success on Get request' });
