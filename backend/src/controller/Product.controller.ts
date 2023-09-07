@@ -76,9 +76,53 @@ export default {
       return res.status(500).json({ message: `Error: ${e.message}` });
     }
   },
+  async updatePack(req: Request, res: Response) {
+    try {
+      const { code, name, costprice, salesprice } = req.body;
+
+      const productExsists = await prisma.product.findUnique({
+        where: {
+          code: Number(code)
+        }
+      });
+
+      if (!productExsists) {
+        return res.json({
+          error: true,
+          message: 'Error: Product not found!',
+        });
+      }
+
+      const product = await prisma.product.update({
+        where: {
+          code: Number(code)
+        },
+        data: {
+          name: name,
+          costprice: costprice,
+          salesprice: salesprice
+        }
+      });
+
+      return res
+        .status(200)
+        .json({
+          error: false,
+          message: 'Success: Updated product!',
+          product: {
+            code: product.code.toString(),
+            name: product.name,
+            costprice: product.costprice,
+            salesprice: product.salesprice
+          }
+        });
+
+    } catch (e) {
+      return res.status(500).json({ message: `Error: ${e.message}` });
+    }
+  },
   async getProduct(req: Request, res: Response) {
     try {
-
       const { code } = req.params;
       const product = await prisma.product.findUnique({
         where: {

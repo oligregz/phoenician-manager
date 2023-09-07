@@ -19,6 +19,7 @@ app.post('/api/v1/create-product', ProductController.createProduct);
 app.post('/api/v1/create-pack', PackController.createPack);
 
 app.put('/api/v1/update-pack', PackController.updatePack);
+app.put('/api/v1/update-product', ProductController.updatePack);
 
 app.delete('/api/v1/delete-pack/:id', PackController.deletePack);
 
