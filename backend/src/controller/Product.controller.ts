@@ -44,5 +44,36 @@ export default {
         .status(500)
         .json({ message: `Error: ${e.message}` });
     }
-  }
+  },
+  async listProducts(req: Request, res: Response) {
+    try {
+
+      const products = await prisma.product.findMany();
+
+      if (!products || products.length === 0) {
+        return res.json({
+          error: true,
+          message: 'Error: Products not found!',
+        });
+      }
+
+      const serializedProducts = products.map((product) => ({
+        code: product.code.toString(),
+        name: product.name,
+        costprice: product.costprice,
+        salesprice: product.salesprice
+      }));
+
+      return res
+        .status(200)
+        .json({
+          error: false,
+          message: 'Success: List products!',
+          products: serializedProducts,
+        });
+
+    } catch (e) {
+      return res.status(500).json({ message: `Error: ${e.message}` });
+    }
+  },
 };

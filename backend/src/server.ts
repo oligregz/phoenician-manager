@@ -12,6 +12,7 @@ app.get('/api/v1', (req, res) => {
 
 app.get('/api/v1/pack', PackController.listPacks);
 app.get('/api/v1/pack/:id', PackController.getPack);
+app.get('/api/v1/product', ProductController.listProducts);
 
 app.post('/api/v1/create-product', ProductController.createProduct);
 app.post('/api/v1/create-pack', PackController.createPack);
