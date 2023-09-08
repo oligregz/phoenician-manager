@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import parseCSV from '../../utils/transformCsv';
 import updateProduct from '../../service/product/update.service';
 import checkRules from '../../utils/businessRules';
+
 
 const FileBox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvData, setCSVData] = useState([]);
   const [validate, setValidate] = useState([]);
-  const [isValid, setIsValidate] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
   }, [csvData]);
@@ -20,28 +22,32 @@ const FileBox = () => {
       try {
         const data = await parseCSV(file);
         setCSVData(data);
+        setErrorMessage(null);
       } catch (e) {
         console.error(`Error processing CSV file: ${e}`);
         throw e;
       }
     }
   };
+
   const handleValidateClick = async () => {
     try {
       let isValid = true;
-  
+      const errorMessages = [];
+
       await Promise.all(csvData.map(async (p) => {
         const rules = await checkRules(p);
-        if (rules !== true) {
-          isValid = false; 
+        if (rules.error) {
+          isValid = false;
+          errorMessages.push(rules.error);
         }
       }));
-  
-      setIsValidate(isValid);
+
+      setIsValid(isValid);
+      setErrorMessage(errorMessages.length > 0 ? errorMessages.join(', ') : null);
     } catch (e) {
-      setIsValidate(false);
-      console.error(e);
-      throw e;
+      setIsValid(false);
+      setErrorMessage(`${e}`);
     }
   };
 
@@ -51,13 +57,13 @@ const FileBox = () => {
         const productUpdated = await updateProduct(product);
         return productUpdated;
       }));
-      setValidate(results)
-      setIsValidate(false);
+      setValidate(results);
+      setIsValid(false);
     } catch (e) {
-      setIsValidate(false);
-      return `Erro: ${e}`;
+      setIsValid(false);
+      setErrorMessage(`${e}`);
     }
-  }
+  };
 
   return (
     <div>
@@ -66,14 +72,37 @@ const FileBox = () => {
       {selectedFile && (
         <p>Selected CSV file: {selectedFile.name}</p>
       )}
-      {
-        isValid ? 
-        (
+      {errorMessage && <p>{errorMessage}</p>}
+      {isValid ? (
+        <div>
           <button onClick={handleUpdateProductClick}>Atualizar</button>
-          ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Current price</th>
+                <th>New Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {csvData.map((product, index) => (
+                <tr key={index}>
+                  <td>{product.code}</td>
+                  <td>{product.name}</td>
+                  <td>{product.currentPrice}</td>
+                  <td>{product.salesprice}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div>
           <button onClick={handleValidateClick}>Validar</button>
-        )
-      }
+        </div>
+      )}
+
     </div>
   );
 };
