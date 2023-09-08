@@ -46,7 +46,7 @@ Relationships:
 <br /><br />
 
 # Flow application <br />
--> Click on the link https://youtu.be/fR9lMu5qUxc to see the application flow
+-> Click on the link https://youtu.be/cd-5jhuSElE to see the application flow
 
 # Guidelines<br />
 
