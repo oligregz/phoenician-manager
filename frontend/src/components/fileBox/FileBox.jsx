@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import parseCSV from '../../utils/transformCsv';
 import updateProduct from '../../service/product/update.service';
+import checkRules from '../../utils/businessRules';
 
 const FileBox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvData, setCSVData] = useState([]);
   const [validate, setValidate] = useState([]);
-  const [isValid, setIsValide] = useState(false);
+  const [isValid, setIsValidate] = useState(false);
 
   useEffect(() => {
-    console.log(csvData);
   }, [csvData]);
 
   const handleFileChange = async (event) => {
@@ -26,33 +26,35 @@ const FileBox = () => {
       }
     }
   };
-
   const handleValidateClick = async () => {
     try {
+      let isValid = true;
+  
       await Promise.all(csvData.map(async (p) => {
-        if (!p.code || !p.salesprice) {
-          setIsValide(false)
-          throw new Error('"code" or "salesprice" fields are not valid !')
+        const rules = await checkRules(p);
+        if (rules !== true) {
+          isValid = false; 
         }
-        console.log(p);
       }));
-      setIsValide(true);
+  
+      setIsValidate(isValid);
     } catch (e) {
-      setIsValide(false);
-      return `Erro: ${e}`;
+      setIsValidate(false);
+      console.error(e);
+      throw e;
     }
   };
 
-  const handleUpdateProductclick = async () => {
+  const handleUpdateProductClick = async () => {
     try {
       const results = await Promise.all(csvData.map(async (product) => {
         const productUpdated = await updateProduct(product);
         return productUpdated;
       }));
       setValidate(results)
-      setIsValide(false);
+      setIsValidate(false);
     } catch (e) {
-      setIsValide(false);
+      setIsValidate(false);
       return `Erro: ${e}`;
     }
   }
@@ -67,7 +69,7 @@ const FileBox = () => {
       {
         isValid ? 
         (
-          <button onClick={handleUpdateProductclick}>Atualizar</button>
+          <button onClick={handleUpdateProductClick}>Atualizar</button>
           ) : (
           <button onClick={handleValidateClick}>Validar</button>
         )
