@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import FileBox from './components/fileBox/FileBox'
 import './App.css'
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <>
       <div className="general">
         <h1 className="title-general">Chegamos</h1>
+        <FileBox />
       </div>
     </>
   )
