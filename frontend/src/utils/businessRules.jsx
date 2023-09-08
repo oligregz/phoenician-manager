@@ -19,15 +19,24 @@ const checkRules = async (product) => {
     const filteredProduct = await filterProduct(product);
 
     if (!filteredProduct || !filteredProduct.code || !filteredProduct.salesprice) {
-      return { error: '"code" or "salesprice" fields are not valid !' };
+      return { 
+        error: `The "code" or "salesprice" fields are not valid for product 
+        ${product.code} and new price ${product.salesprice} ! `
+      };
     } else {
       const diferencePrice = Math.abs(product.salesprice - filteredProduct.salesprice);
       const maxAdjustmentPercentage = product.salesprice * 0.1;
 
       if (diferencePrice > maxAdjustmentPercentage) {
-        return { error: 'Adjustment above 10% !' };
+        return {
+          error: `Adjustment above 10% for product ${product.code}
+          and new price ${product.salesprice} ! ` 
+        };
       } else if (product.costprice > filteredProduct.salesprice) {
-        return { error: 'Cost price greater than selling price!' };
+        return {
+          error: `Cost price greater than selling price
+          for product ${product.code} and new price ${product.salesprice} ! `
+        };
       } else {
         return { success: true };
       }
