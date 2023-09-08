@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import parseCSV from '../../utils/transformCsv';
 import updateProduct from '../../service/product/update.service';
 import checkRules from '../../utils/businessRules';
-
+import { getName, getCurrentPrice } from '../../utils/nameAndCurrentPrice';
 
 const FileBox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -10,6 +10,8 @@ const FileBox = () => {
   const [validate, setValidate] = useState([]);
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [productNames, setProductNames] = useState({});
+  const [productPrices, setProductPrices] = useState({});
 
   useEffect(() => {
   }, [csvData]);
@@ -23,6 +25,16 @@ const FileBox = () => {
         const data = await parseCSV(file);
         setCSVData(data);
         setErrorMessage(null);
+
+        // Busca nomes e preços atuais aqui
+        const names = {};
+        const prices = {};
+        await Promise.all(data.map(async (product) => {
+          names[product.code] = await getName(product.code);
+          prices[product.code] = await getCurrentPrice(product.code);
+        }));
+        setProductNames(names);
+        setProductPrices(prices);
       } catch (e) {
         console.error(`Error processing CSV file: ${e}`);
         throw e;
@@ -89,8 +101,8 @@ const FileBox = () => {
               {csvData.map((product, index) => (
                 <tr key={index}>
                   <td>{product.code}</td>
-                  <td>{product.name}</td>
-                  <td>{product.currentPrice}</td>
+                  <td>{productNames[product.code]}</td>
+                  <td>{productPrices[product.code]}</td>
                   <td>{product.salesprice}</td>
                 </tr>
               ))}
@@ -102,7 +114,6 @@ const FileBox = () => {
           <button onClick={handleValidateClick}>Validar</button>
         </div>
       )}
-
     </div>
   );
 };
