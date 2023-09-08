@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import parseCSV from '../../utils/transformCsv';
 import updateProduct from '../../service/product/update.service';
 import checkRules from '../../utils/businessRules';
@@ -7,7 +7,8 @@ const FileBox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvData, setCSVData] = useState([]);
   const [validate, setValidate] = useState([]);
-  const [isValid, setIsValidate] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
   }, [csvData]);
@@ -26,22 +27,25 @@ const FileBox = () => {
       }
     }
   };
+
   const handleValidateClick = async () => {
     try {
       let isValid = true;
-  
+      const errorMessages = [];
+
       await Promise.all(csvData.map(async (p) => {
         const rules = await checkRules(p);
         if (rules !== true) {
-          isValid = false; 
+          isValid = false;
+          errorMessages.push(rules.message);
         }
       }));
-  
-      setIsValidate(isValid);
+
+      setIsValid(isValid);
+      setErrorMessage(errorMessages.length > 0 ? errorMessages.join(', ') : null);
     } catch (e) {
-      setIsValidate(false);
-      console.error(e);
-      throw e;
+      setIsValid(false);
+      setErrorMessage(`${e}`);
     }
   };
 
@@ -51,13 +55,13 @@ const FileBox = () => {
         const productUpdated = await updateProduct(product);
         return productUpdated;
       }));
-      setValidate(results)
-      setIsValidate(false);
+      setValidate(results);
+      setIsValid(false);
     } catch (e) {
-      setIsValidate(false);
-      return `Erro: ${e}`;
+      setIsValid(false);
+      setErrorMessage(`${e}`);
     }
-  }
+  };
 
   return (
     <div>
@@ -66,14 +70,12 @@ const FileBox = () => {
       {selectedFile && (
         <p>Selected CSV file: {selectedFile.name}</p>
       )}
-      {
-        isValid ? 
-        (
-          <button onClick={handleUpdateProductClick}>Atualizar</button>
-          ) : (
-          <button onClick={handleValidateClick}>Validar</button>
-        )
-      }
+      {errorMessage && <p>{errorMessage}</p>}
+      {isValid ? (
+        <button onClick={handleUpdateProductClick}>Atualizar</button>
+      ) : (
+        <button onClick={handleValidateClick}>Validar</button>
+      )}
     </div>
   );
 };

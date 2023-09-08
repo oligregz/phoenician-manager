@@ -20,18 +20,19 @@ const checkRules = async (product) => {
   try {
     const filteredProduct = await filterProduct(product);
 
-    const diferencePrice = Math.abs(product.salesprice - filteredProduct.salesprice);
-    const maxAdjustmentPercentage = product.salesprice * 0.1
+    // const diferencePrice = Math.abs(product.salesprice - filteredProduct.salesprice);
+    // const maxAdjustmentPercentage = product.salesprice * 0.1
     
     if (!filteredProduct.code || !filteredProduct.salesprice) {
       console.log(filteredProduct[0].code)
-      throw new Error('"code" or "salesprice" fields are not valid !')
+      return {message: '"code" or "salesprice" fields are not valid !'};
 
-    } else if (diferencePrice > maxAdjustmentPercentage) {
-      throw new Error('Adjustment above 10% !')
+    } //else if (diferencePrice > maxAdjustmentPercentage) {
+      //throw new Error('Adjustment above 10% !')
 
-    } else if (product.costprice > filteredProduct.salesprice) {
-      throw new Error('Cost price greater than selling price!')
+    //} 
+      else if (product.costprice > filteredProduct.salesprice) {
+      return {message: 'Cost price greater than selling price!'}
 
     } else {
       return true;
