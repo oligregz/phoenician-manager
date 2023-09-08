@@ -26,7 +26,6 @@ const FileBox = () => {
         setCSVData(data);
         setErrorMessage(null);
 
-        // Busca nomes e preços atuais aqui
         const names = {};
         const prices = {};
         await Promise.all(data.map(async (product) => {
@@ -87,7 +86,7 @@ const FileBox = () => {
       {errorMessage && <p>{errorMessage}</p>}
       {isValid ? (
         <div>
-          <button onClick={handleUpdateProductClick}>Atualizar</button>
+          <button onClick={handleUpdateProductClick}>Update(Atualizar)</button>
           <table>
             <thead>
               <tr>
@@ -111,7 +110,7 @@ const FileBox = () => {
         </div>
       ) : (
         <div>
-          <button onClick={handleValidateClick}>Validar</button>
+          <button onClick={handleValidateClick}>Validate(Validar)</button>
         </div>
       )}
     </div>

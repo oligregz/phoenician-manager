@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div className="general">
-        <h1 className="title-general">Chegamos</h1>
+        <h1 className="title-general">Phoenican Manager</h1>
         <FileBox />
       </div>
     </>
