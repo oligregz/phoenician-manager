@@ -3,11 +3,12 @@ import listProducts from "../service/product/list.service";
 const getName = async (code) => {
   try {
     const allProducts = await listProducts();
-    const name = allProducts.products.filter((p) => {
-      return p.code === code
-    });
-    console.log(name);
-    return name;
+    const product = allProducts.products.find((p) => p.code === code);
+    if (product) {
+      return product.name;
+    } else {
+      return "Product not found";
+    }
   } catch (e) {
     console.error("Error when finding products:", e);
     throw e;
@@ -17,11 +18,12 @@ const getName = async (code) => {
 const getCurrentPrice = async (code) => {
   try {
     const allProducts = await listProducts();
-    const currentPrice = allProducts.products.filter((p) => {
-      return p.code === code
-    });
-    console.log(currentPrice);
-    return currentPrice;
+    const product = allProducts.products.find((p) => p.code === code);
+    if (product) {
+      return product.salesprice;
+    } else {
+      return "Price not found";
+    }
   } catch (e) {
     console.error("Error when finding products:", e);
     throw e;
