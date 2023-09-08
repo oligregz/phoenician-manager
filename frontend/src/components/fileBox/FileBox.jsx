@@ -21,6 +21,7 @@ const FileBox = () => {
       try {
         const data = await parseCSV(file);
         setCSVData(data);
+        setErrorMessage(null);
       } catch (e) {
         console.error(`Error processing CSV file: ${e}`);
         throw e;
@@ -32,15 +33,15 @@ const FileBox = () => {
     try {
       let isValid = true;
       const errorMessages = [];
-  
+
       await Promise.all(csvData.map(async (p) => {
-        const result = await checkRules(p);
-        if (result.error) {
+        const rules = await checkRules(p);
+        if (rules.error) {
           isValid = false;
-          errorMessages.push(result.error);
+          errorMessages.push(rules.error);
         }
       }));
-  
+
       setIsValid(isValid);
       setErrorMessage(errorMessages.length > 0 ? errorMessages.join(', ') : null);
     } catch (e) {
@@ -48,7 +49,6 @@ const FileBox = () => {
       setErrorMessage(`${e}`);
     }
   };
-  
 
   const handleUpdateProductClick = async () => {
     try {
@@ -73,10 +73,35 @@ const FileBox = () => {
       )}
       {errorMessage && <p>{errorMessage}</p>}
       {isValid ? (
-        <button onClick={handleUpdateProductClick}>Atualizar</button>
+        <div>
+          <button onClick={handleUpdateProductClick}>Atualizar</button>
+          <table>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Current price</th>
+                <th>New Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {csvData.map((product, index) => (
+                <tr key={index}>
+                  <td>{product.code}</td>
+                  <td>{product.name}</td>
+                  <td>{product.currentPrice}</td>
+                  <td>{product.newPrice}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
-        <button onClick={handleValidateClick}>Validar</button>
+        <div>
+          <button onClick={handleValidateClick}>Validar</button>
+        </div>
       )}
+
     </div>
   );
 };
