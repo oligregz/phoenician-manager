@@ -3,6 +3,7 @@ import parseCSV from '../../utils/transformCsv';
 import updateProduct from '../../service/product/update.service';
 import checkRules from '../../utils/businessRules';
 
+
 const FileBox = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [csvData, setCSVData] = useState([]);
@@ -90,7 +91,7 @@ const FileBox = () => {
                   <td>{product.code}</td>
                   <td>{product.name}</td>
                   <td>{product.currentPrice}</td>
-                  <td>{product.newPrice}</td>
+                  <td>{product.salesprice}</td>
                 </tr>
               ))}
             </tbody>
