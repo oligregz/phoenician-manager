@@ -32,15 +32,15 @@ const FileBox = () => {
     try {
       let isValid = true;
       const errorMessages = [];
-
+  
       await Promise.all(csvData.map(async (p) => {
-        const rules = await checkRules(p);
-        if (rules !== true) {
+        const result = await checkRules(p);
+        if (result.error) {
           isValid = false;
-          errorMessages.push(rules.message);
+          errorMessages.push(result.error);
         }
       }));
-
+  
       setIsValid(isValid);
       setErrorMessage(errorMessages.length > 0 ? errorMessages.join(', ') : null);
     } catch (e) {
@@ -48,6 +48,7 @@ const FileBox = () => {
       setErrorMessage(`${e}`);
     }
   };
+  
 
   const handleUpdateProductClick = async () => {
     try {
