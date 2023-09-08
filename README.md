@@ -46,8 +46,6 @@ Relationships:
 <br /><br />
 
 # Flow application <br />
-<iframe width="560" height="315" src="../doc-api/phoenincan-application-flow.mp4" frameborder="0" allowfullscreen></iframe>
-<iframe width="560" height="315" src="https://youtu.be/fR9lMu5qUxc" frameborder="0" allowfullscreen></iframe>
 -> Click on the link https://youtu.be/fR9lMu5qUxc to see the application flow
 
 # Guidelines<br />
