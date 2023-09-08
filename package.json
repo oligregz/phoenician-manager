@@ -1,0 +1,18 @@
+{
+  "name": "shopper",
+  "version": "1.0.0",
+  "description": "Inspired by the Phoenicians' high ability to price and market, this tool was developed !",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  },
+  "scripts": {
+    "start-backend": "cd backend && yarn dev",
+    "start-frontend": "cd frontend && yarn dev",
+    "dev": "concurrently \"cd backend && yarn dev\" \"cd frontend && yarn dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
