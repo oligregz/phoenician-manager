@@ -10,6 +10,7 @@
   "scripts": {
     "start-backend": "cd backend && yarn dev",
     "start-frontend": "cd frontend && yarn dev",
+    "dev-i": "concurrently \"cd backend && yarn\" \"cd frontend && yarn\"",
     "dev": "concurrently \"cd backend && yarn dev\" \"cd frontend && yarn dev\""
   },
   "keywords": [],
