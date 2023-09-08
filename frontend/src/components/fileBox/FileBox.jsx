@@ -83,10 +83,13 @@ const FileBox = () => {
       {selectedFile && (
         <p>Selected CSV file: {selectedFile.name}</p>
       )}
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <div>
+            <h2>Errors alidate:</h2>
+            <p>{errorMessage}</p>
+            <h2>Attach another file</h2>
+          </div>}
       {isValid ? (
         <div>
-          <button onClick={handleUpdateProductClick}>Update(Atualizar)</button>
           <table>
             <thead>
               <tr>
@@ -107,6 +110,7 @@ const FileBox = () => {
               ))}
             </tbody>
           </table>
+          <button onClick={handleUpdateProductClick}>Update(Atualizar)</button>
         </div>
       ) : (
         <div>
