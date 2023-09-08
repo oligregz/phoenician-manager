@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "0bcc5138-1285-4faf-a741-c8afb47b1556",
+		"name": "phoenican-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20417687",
+		"_collection_link": "https://zgoz-apire.postman.co/workspace/b41e10b1-107c-4555-867b-26499c034cfa/collection/20417687-0bcc5138-1285-4faf-a741-c8afb47b1556?action=share&source=collection_link&creator=20417687"
+	},
+	"item": [
+		{
+			"name": "Hello api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5945/api/v1"
+			},
+			"response": []
+		},
+		{
+			"name": "create-product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"54209\",\n    \"name\": \"H2O\",\n    \"costprice\": 20.10,\n    \"salesprice\": 20.01\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5945/api/v1/create-product"
+			},
+			"response": []
+		},
+		{
+			"name": "create-pack",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pack_id\": 1020,\n    \"product_id\": 18,\n    \"qty\": 14\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5945/api/v1/create-pack"
+			},
+			"response": []
+		},
+		{
+			"name": "list-packs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5945/api/v1/pack"
+			},
+			"response": []
+		},
+		{
+			"name": "get-pack-by-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5945/api/v1/pack/11"
+			},
+			"response": []
+		},
+		{
+			"name": "update-pack",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"11\",\n    \"pack_id\": \"1020\",\n    \"product_id\": \"23\",\n    \"qty\": \"37\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5945/api/v1/update-pack"
+			},
+			"response": []
+		},
+		{
+			"name": "delete-pack",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:5945/api/v1/delete-pack/20"
+			},
+			"response": []
+		},
+		{
+			"name": "list-products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5945/api/v1/product"
+			},
+			"response": []
+		},
+		{
+			"name": "get-product-by-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5945/api/v1/product/1000"
+			},
+			"response": []
+		},
+		{
+			"name": "update-product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": 54209,\n    \"name\": \"H2O2 UPDATE\",\n    \"costprice\": \"43.12\",\n    \"salesprice\": \"43.14\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5945/api/v1/update-product"
+			},
+			"response": []
+		},
+		{
+			"name": "updated-products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5945/api/v1/updated-products"
+			},
+			"response": []
+		},
+		{
+			"name": "update-product-with-two-params-in-body",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": 54209,\n    \"salesprice\": \"43.14\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5945/api/v1/update-product"
+			},
+			"response": []
+		}
+	]
+}
