@@ -1,273 +1,171 @@
-{
-  "swagger": "2.0",
-  "info": {
-    "title": "Phoenican API",
-    "version": "1.0.0",
-    "description": "Documentação da Phoenican API"
-  },
-  "host": "localhost:5945",
-  "basePath": "/api/v1",
-  "schemes": ["http"],
-  "paths": {
-    "/": {
-      "get": {
-        "summary": "Hello API",
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/create-product": {
-      "post": {
-        "summary": "Create Product",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "costprice": {
-                  "type": "number",
-                  "format": "float"
-                },
-                "salesprice": {
-                  "type": "number",
-                  "format": "float"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/create-pack": {
-      "post": {
-        "summary": "Create Pack",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "pack_id": {
-                  "type": "integer"
-                },
-                "product_id": {
-                  "type": "integer"
-                },
-                "qty": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/pack": {
-      "get": {
-        "summary": "List Packs",
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/pack/{id}": {
-      "get": {
-        "summary": "Get Pack by ID",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/update-pack": {
-      "put": {
-        "summary": "Update Pack",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "pack_id": {
-                  "type": "integer"
-                },
-                "product_id": {
-                  "type": "integer"
-                },
-                "qty": {
-                  "type": "integer"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/delete-pack/{id}": {
-      "delete": {
-        "summary": "Delete Pack",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/product": {
-      "get": {
-        "summary": "List Products",
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/product/{id}": {
-      "get": {
-        "summary": "Get Product by ID",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/update-product": {
-      "put": {
-        "summary": "Update Product",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "costprice": {
-                  "type": "number",
-                  "format": "float"
-                },
-                "salesprice": {
-                  "type": "number",
-                  "format": "float"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/updated-products": {
-      "get": {
-        "summary": "Updated Products",
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    },
-    "/update-product-with-two-params-in-body": {
-      "put": {
-        "summary": "Update Product with Two Params in Body",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "type": "string"
-                },
-                "salesprice": {
-                  "type": "number",
-                  "format": "float"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resposta bem-sucedida"
-          }
-        }
-      }
-    }
-  }
-}
+swagger: '2.0'
+info:
+  title: Phoenican API
+  version: 1.0.0
+  description: Documentação da Phoenican API
+host: localhost:5945
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /:
+    get:
+      summary: Hello API
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /create-product:
+    post:
+      summary: Create Product
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              name:
+                type: string
+              costprice:
+                type: number
+                format: float
+              salesprice:
+                type: number
+                format: float
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /create-pack:
+    post:
+      summary: Create Pack
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              pack_id:
+                type: integer
+              product_id:
+                type: integer
+              qty:
+                type: integer
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /pack:
+    get:
+      summary: List Packs
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /pack/{id}:
+    get:
+      summary: Get Pack by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /update-pack:
+    put:
+      summary: Update Pack
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              pack_id:
+                type: integer
+              product_id:
+                type: integer
+              qty:
+                type: integer
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /delete-pack/{id}:
+    delete:
+      summary: Delete Pack
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /product:
+    get:
+      summary: List Products
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /product/{id}:
+    get:
+      summary: Get Product by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /update-product:
+    put:
+      summary: Update Product
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              name:
+                type: string
+              costprice:
+                type: number
+                format: float
+              salesprice:
+                type: number
+                format: float
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /updated-products:
+    get:
+      summary: Updated Products
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+  /update-product-with-two-params-in-body:
+    put:
+      summary: Update Product with Two Params in Body
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              salesprice:
+                type: number
+                format: float
+      responses:
+        '200':
+          description: Resposta bem-sucedida
