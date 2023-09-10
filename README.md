@@ -53,14 +53,14 @@ Relationships:
 # Guidelines<br />
 
 ## 1º Step
-clone the repository:
+Clone the repository:
   ```bash
   git clone git@github.com:oligregz/phoenician-manager.git
   ```
 <br /><br />
 
 ## 2º Step
-access the project directory:
+Access the project directory:
   ```bash
   cd phoenician-manager
   ```
