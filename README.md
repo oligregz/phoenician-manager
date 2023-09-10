@@ -1,11 +1,11 @@
 # Welcome to the Phoenican repository!
 
-Inspired by the Phoenicians' high ability to price and market, this tool was developed!<br />
+Inspired by the Phoenicians' high ability to price and market, this tool was developed!<br /><br />
 
-<summary><strong>🤷 How it works ?</strong></summary><br />
-This tool has the function of capturing data from a CSV file to update the database.<br />
+<summary><strong>🤷 How it works ?</strong></summary>
+This tool has the function of capturing data from a CSV file to update the database.<br /><br />
 
-<summary><strong>👨‍💻 What was used?</strong></summary><br />
+<summary><strong>👨‍💻 What was used?</strong></summary>
 
 <strong>Technologies and Skills</strong><br />
 <strong>_Frontend_</strong> <br />
@@ -20,6 +20,7 @@ This tool has the function of capturing data from a CSV file to update the datab
 ~ SQL Database(MySQL)<br />
 ~ Postman<br />
 ~ MySQL Workbench<br /><br />
+<br /><br />
 
 ## UML Data Model
 
@@ -43,10 +44,11 @@ Relationships:
 
 Relationships:
 - `pack`: A pack
-<br /><br />
+<br /><br /><br /><br />
 
 # Flow application <br />
 -> Click on the link https://youtu.be/cd-5jhuSElE to see the application flow
+<br /><br /><br /><br />
 
 # Guidelines<br />
 
@@ -65,7 +67,10 @@ access the project directory:
 <br /><br />
 
 ## 3º Step
-Install the project's dependencies in the application's parent directory with the command:
+Install the project's dependencies in the application's parent directory with the commands:
+  ```bash
+  yarn
+  ```
   ```bash
   yarn dev-i
   ```
@@ -73,6 +78,7 @@ Install the project's dependencies in the application's parent directory with th
 
 ## 4º Step
 Navigate to the 'backend' directory, configure your environment variable according to the examples passed in the .env.example file and then rename it to .env<br /><br />
+<br /><br />
 
 ## 5º Step
 Perform the necessary table migrations for your database with the command:
@@ -82,9 +88,11 @@ Perform the necessary table migrations for your database with the command:
 <strong>Attention:</strong> Make sure you have the database created on your machine or on a docker container.
 If your models were not created in the database, copy the migration files created in the "migrations" directory that is inside the prism directory and run them in your database.
 <br /><br />
+<br /><br />
 
 ## 6º Step
 Fill your database with the data passed in the "database.sql" file present in the application's parent directory.
+<br /><br />
 <br /><br />
 
 ## 7º Step
@@ -93,6 +101,7 @@ Make sure you are in the application's parent directory and launch it in the ter
   yarn dev
   ```
 <strong>Tip:</strong> The application can have the backend and frontend layers started separately, pay attention to the json!
+<br /><br />
 <br /><br />
 
 ### OBS:<br />
