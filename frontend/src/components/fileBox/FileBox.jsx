@@ -12,9 +12,15 @@ const FileBox = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [productNames, setProductNames] = useState({});
   const [productPrices, setProductPrices] = useState({});
+  const [isFileAttached, setIsFileAttached] = useState(false); // Novo estado para verificar se um arquivo está anexado
 
   useEffect(() => {
   }, [csvData]);
+
+  useEffect(() => {
+    // Atualize o estado isFileAttached quando um arquivo for selecionado ou removido
+    setIsFileAttached(!!selectedFile);
+  }, [selectedFile]);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -88,33 +94,39 @@ const FileBox = () => {
             <p>{errorMessage}</p>
             <h2>Attach another file</h2>
           </div>}
-      {isValid ? (
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Current price</th>
-                <th>New Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {csvData.map((product, index) => (
-                <tr key={index}>
-                  <td>{product.code}</td>
-                  <td>{productNames[product.code]}</td>
-                  <td>{productPrices[product.code]}</td>
-                  <td>{product.salesprice}</td>
+      {isFileAttached ? ( // Verifica se um arquivo está anexado antes de mostrar o botão "Validate(Validar)"
+        isValid ? (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Name</th>
+                  <th>Current price</th>
+                  <th>New Price</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <button onClick={handleUpdateProductClick}>Update(Atualizar)</button>
-        </div>
+              </thead>
+              <tbody>
+                {csvData.map((product, index) => (
+                  <tr key={index}>
+                    <td>{product.code}</td>
+                    <td>{productNames[product.code]}</td>
+                    <td>{productPrices[product.code]}</td>
+                    <td>{product.salesprice}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button onClick={handleUpdateProductClick}>Update(Atualizar)</button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={handleValidateClick}>Validate(Validar)</button>
+          </div>
+        )
       ) : (
         <div>
-          <button onClick={handleValidateClick}>Validate(Validar)</button>
+          <button disabled>Validate(Validar)</button> {/* Desabilita o botão se nenhum arquivo estiver anexado */}
         </div>
       )}
     </div>
